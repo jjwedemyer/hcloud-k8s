@@ -29,3 +29,18 @@ variable "floatip_count" {
   type        = number
   description = "Floating IPs count - Replaced by Ansible Playbook on run"
 }
+
+variable "use_my_ip" {
+  type        = number
+  description = "Use Existing IP - Replaced by Ansible Playbook on run"
+}
+
+variable "my_ip_tag" {
+  type        = string
+  description = "Floating IP tag - Replaced by Ansible Playbook on run"
+}
+
+variable "domain" {
+  type        = string
+  description = "Top Level Domain - Replaced by Absible Playbook on run"
+}

@@ -1,19 +1,21 @@
 # hcloud-k8s
 
-# unfortunately I have no time to maintain - please fork it
-
 Install a Kubernetes Cluster on Hetzner Cloud. The Playbook install a Master and Workers with Private Networking inclusive Cloud Controller Manager for Hetzner Cloud, Load Balancer and Failover IPs.
 
-Tested Versions Kubernetes v1.15.5 and v1.16.2
+Tested Versions Kubernetes v1.15.5 and v1.16.x and v1.17.4
+
+---
+# Forked to align with more current dependencies
 
 ## Local Requirements
-  - Ansible v2.8.5 (https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
-  - Terraform v0.12.10 (https://github.com/tfutils/tfenv#installation)
-  - Helm v2.14.3 (https://github.com/helm/helm#install)
-  - Kubectl v1.16.2 (https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+  - Ansible v2.9.6 (https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
+  - Terraform v0.12.24 (https://github.com/tfutils/tfenv#installation)
+  - Helm v3.1.2 (https://github.com/helm/helm#install)
+  - Kubectl v1.17.3 (https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
 ## Prerequirments edit the following files
   - create a HCloud Project in Hetzner Cloud Console
+  - copy/rename "env/values.yaml.example" to "env/values.yaml"
   - create a API Token and set in "env/values.yaml"
   - edit the values in "env/values.yaml"
 
@@ -45,6 +47,12 @@ ansible-playbook get-kubeconfig.yaml -i env/inventory
 ansible-playbook destroy-infrastructure.yaml
 ```
 The Playbook execute Terraform and destroy the resources (Delete Instances, Floating IPs, Networks). The working directory is "roles/tf-infrastructure/terraform/"
+
+## Add new nodes into cluster
+```bash
+ansible-playbook k8s-scale.yaml -i env/inventory
+```
+The playbook will setup new nodes and join them already created cluster. You should run this, if you have changed workers amount bigger after creating cluster from `env/values.yaml`.
 
 ## What's happening
   - Create Infrastructure on Hetzner Cloud with Terraform (roles/tf-infrastructure/terraform/)
