@@ -4,6 +4,8 @@ Install a Kubernetes Cluster on Hetzner Cloud. The Playbook install a Master and
 
 Tested Versions Kubernetes v1.15.5 and v1.16.x and v1.17.4
 
+[HCLOUD GUIDE](https://community.hetzner.com/tutorials/install-kubernetes-cluster)
+
 ---
 # Forked to align with more current dependencies
 
